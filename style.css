@@ -19,25 +19,30 @@ body {
 
 .game-menu {
     display: flex;
+    flex-direction: column;
     margin-bottom: 50px;
 }
 
 .game-menu-colors,
 .game-menu-options {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
 }
 
-.game-menu-colors {
-    margin-right: 128px;
+.game-menu-options {
+    margin-bottom: 36px;
+    justify-content: space-evenly;
 }
 
 .game-menu-colors button,
 .game-menu-options button {
     background-color: #57A6A1;
-    margin-bottom: 36px;
     padding: 1em;
     border-radius: 10px;
+}
+
+.game-menu-colors #random {
+    margin: 0 64px;
 }
 
 .game-menu button:hover {
@@ -58,4 +63,5 @@ body {
 .game-board .game-area {
     font-size: 0;
     display: flex;
+    background-color: #FAF9F6;
 }

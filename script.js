@@ -26,9 +26,18 @@ function createBoard(squaresPerSide, color) {
             button.style.height = buttonSize + "px";
             button.style.backgroundColor = "#FAF9F6";
 
+            if (color === "darken") {
+                button.style.opacity = 0;
+                button.style.backgroundColor = "black";
+            }
+
             button.addEventListener("mouseover", () => {
                 if (color === "random") {
                     button.style.backgroundColor = getRandomColorHex();
+                } else if (color === "darken") {
+                    let oldValue = +button.style.opacity;
+                    let newValue = oldValue + 0.1;
+                    button.style.opacity = newValue;
                 } else {
                     button.style.backgroundColor = color;
                 }
@@ -56,10 +65,7 @@ createBoard(currentSquaresPerSide, currentColor);
 // Setting up reset button
 const resetButton = document.querySelector("#reset");
 resetButton.addEventListener("click", () => {
-    let buttons = gameAreaDiv.querySelectorAll("button");
-    buttons.forEach((button) => {
-        button.style.backgroundColor = "#FAF9F6";
-    });
+    createBoard(currentSquaresPerSide, currentColor);
 });
 
 // Setting up custom grid size button
@@ -86,5 +92,12 @@ randomColorButton.addEventListener("click", () => {
 const blackColorButton = document.querySelector("#black");
 blackColorButton.addEventListener("click", () => {
     currentColor = "black";
+    createBoard(currentSquaresPerSide, currentColor);
+});
+
+// Setting up darken button
+const darkenColorButton = document.querySelector("#darken");
+darkenColorButton.addEventListener("click", () => {
+    currentColor = "darken";
     createBoard(currentSquaresPerSide, currentColor);
 });
