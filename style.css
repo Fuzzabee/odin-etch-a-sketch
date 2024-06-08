@@ -1,0 +1,48 @@
+* {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #344C64;
+    color: #577B8D;
+    font-family: "Courier New", sans-serif;
+}
+
+.title-card {
+    margin: 50px 0;
+}
+
+.game-menu {
+    margin-bottom: 50px;
+}
+
+.game-menu button {
+    background-color: #57A6A1;
+    border-radius: 10px;
+    margin: 0 64px;
+    padding: 1em;
+}
+
+.game-menu button:hover {
+    background-color: #64e2da;
+}
+
+.game-board,
+.game-area {
+    width: 640px;
+    height: 640px;    
+}
+
+.game-board {
+    border: 5px solid black;
+}
+
+.game-board .game-area {
+    font-size: 0;
+    display: flex;
+}
