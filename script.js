@@ -6,17 +6,14 @@ const GAME_BOARD_LENGTH = 640;
 const gameBoardDiv = document.querySelector(".game-board");
 const gameAreaDiv = document.querySelector(".game-board .game-area");
 
-function createBoard(squaresPerSide) {
+let currentColor = "black";
+let currentSquaresPerSide = NUM_SQUARES_PER_SIDE_DEFAULT;
+
+function createBoard(squaresPerSide, color) {
     // Erase current board
     gameAreaDiv.innerHTML = "";
 
-    const buttonSize = Math.floor(GAME_BOARD_LENGTH / squaresPerSide);
-
-    // Setting game board size
-    gameBoardDiv.style.width = buttonSize * squaresPerSide + "px";
-    gameBoardDiv.style.height = buttonSize * squaresPerSide + "px";
-    gameAreaDiv.style.width = buttonSize * squaresPerSide + "px";
-    gameAreaDiv.style.height = buttonSize * squaresPerSide + "px";
+    const buttonSize = GAME_BOARD_LENGTH / squaresPerSide;
 
     // Setting up grid
     for (let i = 0; i < squaresPerSide; i++) {
@@ -30,29 +27,42 @@ function createBoard(squaresPerSide) {
             button.style.backgroundColor = "#FAF9F6";
 
             button.addEventListener("mouseover", () => {
-                button.style.backgroundColor = "black";
+                if (color === "random") {
+                    button.style.backgroundColor = getRandomColorHex();
+                } else {
+                    button.style.backgroundColor = color;
+                }
             })
-
             rowDiv.appendChild(button);
         }
-
         gameAreaDiv.appendChild(rowDiv);
     }
 }
 
-createBoard(NUM_SQUARES_PER_SIDE_DEFAULT);
+function getRandomColorHex() {
+    const hex = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f"]
+    let color = [];
+
+    color.push("#");
+    for (let i = 0; i < 6; i++) {
+        color.push(hex[Math.floor(Math.random() * 16)]);
+    }
+
+    return color.join("");
+}
+
+createBoard(currentSquaresPerSide, currentColor);
 
 // Setting up reset button
 const resetButton = document.querySelector("#reset");
 resetButton.addEventListener("click", () => {
     let buttons = gameAreaDiv.querySelectorAll("button");
-    console.log(buttons.length);
     buttons.forEach((button) => {
         button.style.backgroundColor = "#FAF9F6";
     });
 });
 
-// Setting up custom grid size
+// Setting up custom grid size button
 const gridSizeButton = document.querySelector("#set-grid-size");
 gridSizeButton.addEventListener("click", () => {
     let userInput = +prompt("How many squares per side? (2-100)");
@@ -61,5 +71,20 @@ gridSizeButton.addEventListener("click", () => {
         return;
     }
 
-    createBoard(userInput);    
+    currentSquaresPerSide = userInput;
+    createBoard(currentSquaresPerSide, currentColor);
+});
+
+// Setting up random color button
+const randomColorButton = document.querySelector("#random");
+randomColorButton.addEventListener("click", () => {
+    currentColor = "random";
+    createBoard(currentSquaresPerSide, currentColor);
+});
+
+// Setting up black color button
+const blackColorButton = document.querySelector("#black");
+blackColorButton.addEventListener("click", () => {
+    currentColor = "black";
+    createBoard(currentSquaresPerSide, currentColor);
 });
