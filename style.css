@@ -18,14 +18,26 @@ body {
 }
 
 .game-menu {
+    display: flex;
     margin-bottom: 50px;
 }
 
-.game-menu button {
+.game-menu-colors,
+.game-menu-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.game-menu-colors {
+    margin-right: 128px;
+}
+
+.game-menu-colors button,
+.game-menu-options button {
     background-color: #57A6A1;
-    border-radius: 10px;
-    margin: 0 64px;
+    margin-bottom: 36px;
     padding: 1em;
+    border-radius: 10px;
 }
 
 .game-menu button:hover {
